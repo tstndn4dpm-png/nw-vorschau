@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="pages.css">
-  <script>document.documentElement.classList.add('js');</script>
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__nwReady){document.documentElement.classList.remove('js');}},3000);</script>
 </head>
 <body>
 
@@ -55,7 +55,7 @@
   <section class="page-hero page-hero--sand">
     <div class="wrap">
       <nav class="breadcrumb" aria-label="Brotkrumen"><a href="index.html">Startseite</a><span aria-hidden="true">/</span><a href="ueber-uns.html">Unternehmen</a><span aria-hidden="true">/</span><span aria-current="page">Nachhaltigkeit</span></nav>
-      <div class="page-hero-grid" style="grid-template-columns: minmax(0, 1fr) minmax(0, 480px); align-items: center;">
+      <div class="page-hero-grid page-hero-grid--facts">
         <div class="page-hero-copy">
           <div class="eyebrow">Unternehmen · Nachhaltigkeit</div>
           <h1>Weniger Material. Mehr Kreislauf.</h1>
@@ -90,25 +90,25 @@
         <div class="tile tile--sand">
           <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#273581" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21c1-6 1-11-1-16M9 21c0-7 1-12 4-17M14 21c0-5 2-9 6-12M19 21c0-3 1-5 2-6"/></svg>
           <h3>Graspapier</h3>
-          <span class="fact">30 % Gras</span>
+          <span class="tile-fact">30 % Gras</span>
           <p>Die Aufbereitung der Grasfasern braucht 97 % weniger Energie und 99 % weniger Wasser als Zellstoff – ca. 20 % weniger CO₂ in der Herstellung.</p>
         </div>
         <div class="tile tile--sand">
           <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#273581" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2h4v3l2 3v12a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V8l2-3z"/><path d="M8 12h8v5H8z"/></svg>
           <h3>CLEAN PET</h3>
-          <span class="fact">rückstandsfrei</span>
+          <span class="tile-fact">rückstandsfrei</span>
           <p>Hält während der Nutzung dauerhaft – und löst sich beim Recycler im Laugenbad. Das Etikett schwimmt auf, das PET bleibt sauber.</p>
         </div>
         <div class="tile tile--sand">
           <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#273581" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V2M10 7h3M10 12h3M10 17h3"/><path d="M10 9c-3 0-5-2-6-5 3 0 5 2 6 5zM10 14c3 0 6-2 7-5-3 0-6 2-7 5z"/></svg>
           <h3>BIO-PE</h3>
-          <span class="fact">aus Zuckerrohr</span>
+          <span class="tile-fact">aus Zuckerrohr</span>
           <p>Biobasierte PE-Folie aus Zuckerrohrethanol – recycelbar wie herkömmliches PE, ohne Abstriche bei Optik und Lebensdauer.</p>
         </div>
         <div class="tile tile--sand">
           <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#273581" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8"/><path d="M18 2v4h-4M6 22v-4h4"/></svg>
           <h3>Recyclingmaterial</h3>
-          <span class="fact">100 % recycelt</span>
+          <span class="tile-fact">100 % recycelt</span>
           <p>Haftpapier aus 100 % Altpapier mit hohem Weißgrad – oder PE-Folie aus 100 % recyceltem Material.</p>
         </div>
       </div>

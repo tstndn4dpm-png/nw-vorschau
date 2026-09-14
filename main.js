@@ -1,6 +1,8 @@
 (function () {
   'use strict';
 
+  window.__nwReady = true;
+
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function makeTabs(container, branches, onPick) {
@@ -214,7 +216,10 @@
         var active = byId[entry.target.id];
         if (active) {
           active.classList.add('is-active');
-          active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+          var bar = active.parentNode;
+          if (bar.scrollWidth > bar.clientWidth) {
+            bar.scrollTo({ left: Math.max(0, active.offsetLeft - 20), behavior: 'auto' });
+          }
         }
       });
     }, { rootMargin: '-35% 0px -60% 0px' });

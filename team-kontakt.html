@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="pages.css">
-  <script>document.documentElement.classList.add('js');</script>
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__nwReady){document.documentElement.classList.remove('js');}},3000);</script>
 </head>
 <body>
 
@@ -91,11 +91,11 @@
             <div class="field field--full"><label for="f-mail">E-Mail *</label><input id="f-mail" name="email" type="email" autocomplete="email" required></div>
             <div class="field field--full"><label for="f-nachricht">Nachricht</label><textarea id="f-nachricht" name="nachricht"></textarea></div>
           </div>
-          <div class="form-row">
-            <strong>Rückmeldung</strong>
+          <fieldset class="form-row">
+            <legend>Rückmeldung</legend>
             <label><input type="radio" name="rueckmeldung" value="telefon" checked>per Telefon</label>
             <label><input type="radio" name="rueckmeldung" value="mail">per E-Mail</label>
-          </div>
+          </fieldset>
           <div class="form-foot">
             <label><input type="checkbox" name="datenschutz" required>Ich stimme der Datenschutzerklärung zu.</label>
             <button class="btn btn--teal" type="submit">Nachricht senden</button>
