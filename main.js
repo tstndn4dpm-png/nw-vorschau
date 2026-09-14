@@ -48,7 +48,8 @@
 
     function show(k) {
       current = k;
-      layers.forEach(function (layer) { layer.hidden = layer.getAttribute('data-layer') !== branches[k].key; });
+      // SVG-Elemente kennen die .hidden-Eigenschaft nicht – daher das Attribut setzen
+      layers.forEach(function (layer) { layer.toggleAttribute('hidden', layer.getAttribute('data-layer') !== branches[k].key); });
       setActiveTab(tabs, k);
       caption.textContent = branches[k].caption;
       if (root.getAnimations) {
