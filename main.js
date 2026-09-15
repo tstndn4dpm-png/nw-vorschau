@@ -357,6 +357,80 @@
     });
   }
 
+  function whenVisible(els, threshold, onVisible) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          onVisible(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: threshold });
+    els.forEach(function (el) { observer.observe(el); });
+  }
+
+  // Druck-Effekt: Überschriften laufen wie Farbauszüge in Passer
+  function initPasser() {
+    if (reducedMotion || !('IntersectionObserver' in window)) return;
+    var els = document.querySelectorAll('.h2, .page-hero h1, .career-copy h2, .contact-copy h2, .contact-card-copy h2');
+    els.forEach(function (el) { el.classList.add('passer'); });
+    whenVisible(els, 0.6, function (el) { el.classList.add('in-view'); });
+  }
+
+  // Druck-Effekt: Fotos bauen sich in Farbdurchgängen auf
+  function initPrintIn() {
+    if (reducedMotion || !('IntersectionObserver' in window)) return;
+    var imgs = document.querySelectorAll('.photo-card img, .photo-frame img, .photo-split img, .career > img, .contact-photo, .contact-card > img');
+    // Beobachtet wird der Rahmen – das Foto selbst ist anfangs weggeschnitten
+    var frames = [];
+    imgs.forEach(function (img) {
+      img.classList.add('print-in');
+      frames.push(img.parentElement);
+    });
+    whenVisible(frames, 0.25, function (frame) {
+      frame.querySelectorAll('.print-in:not(.in-view)').forEach(reveal);
+    });
+    function reveal(img) {
+      function go() { img.classList.add('in-view'); }
+      if (img.complete && img.naturalWidth) go();
+      else {
+        img.addEventListener('load', go, { once: true });
+        img.addEventListener('error', go, { once: true });
+      }
+    }
+  }
+
+  // Scroll-Fortschritt als Etikettenrolle, die sich abwickelt
+  function initRoll() {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    var bar = document.createElement('div');
+    bar.className = 'roll-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    bar.innerHTML = '<span class="roll-web"></span><span class="roll"></span>';
+    header.appendChild(bar);
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      bar.classList.toggle('is-active', max > 240 && window.scrollY > 4);
+      bar.style.setProperty('--p', p.toFixed(4));
+    }
+    function request() {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+    update();
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    initPasser();
+    initPrintIn();
+    initRoll();
+  });
+
   document.addEventListener('DOMContentLoaded', function () {
     var labelStage = document.querySelector('[data-label-stage]');
     var pressStage = document.querySelector('[data-press-stage]');
