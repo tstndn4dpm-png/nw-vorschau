@@ -444,3 +444,10 @@ figure { margin: 0; }
   .pr-track { width: 100% !important; }
   .st-tab.is-active .st-tabbar { animation: none; transform: none; }
 }
+
+/* Social Media */
+.social { display: flex; gap: 10px; }
+.social a { width: 44px; height: 44px; border-radius: 22px; border: 1px solid #2c4557; color: #fff; display: inline-flex; align-items: center; justify-content: center; transition: background .2s, border-color .2s, color .2s; }
+.social a:hover { background: var(--teal); border-color: var(--teal); color: var(--deep); }
+.mobile-nav .social { margin-top: 16px; }
+.mobile-nav .social a { width: 44px; min-height: 44px; border: 1px solid #2c4557; font-size: 0; justify-content: center; }
