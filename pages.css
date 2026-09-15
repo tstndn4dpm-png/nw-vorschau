@@ -423,7 +423,7 @@ a.tile:hover, .js .stagger.in-view > a.tile:hover { transform: translateY(-4px);
 .legal-acc { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; }
 .legal-acc .acc summary { font-size: 17px; min-height: 56px; }
 @media (max-width: 760px) {
-  .legal h2 { margin-top: 44px; font-size: 22px; }
+  .legal > h2 { margin-top: 44px; font-size: 22px; }
   .legal-facts { grid-template-columns: minmax(0, 1fr); }
   .legal-toc ol { columns: 1; }
   .legal-address { padding: 16px 18px; }
