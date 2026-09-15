@@ -425,10 +425,18 @@
     window.addEventListener('resize', request);
   }
 
+  // Touch-Geräte haben kein Hover: Karten lösen sich einmal beim Hineinscrollen
+  function initTouchPeel() {
+    if (reducedMotion || !('IntersectionObserver' in window) || !window.matchMedia('(hover: none)').matches) return;
+    var cards = document.querySelectorAll('a.card, a.tile, .catalog-card, .team-card');
+    whenVisible(cards, 0.7, function (card) { card.classList.add('peel-in'); });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initPasser();
     initPrintIn();
     initRoll();
+    initTouchPeel();
   });
 
   document.addEventListener('DOMContentLoaded', function () {
