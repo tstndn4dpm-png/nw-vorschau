@@ -279,6 +279,60 @@
     });
   }
 
+  function initMega() {
+    document.querySelectorAll('.has-mega').forEach(function (item) {
+      var trigger = item.querySelector('.nav-trigger');
+      function setOpen(open) {
+        item.classList.toggle('is-open', open);
+        trigger.setAttribute('aria-expanded', String(open));
+      }
+      // Auf Touch-Geräten öffnet der erste Tipp das Menü, der zweite folgt dem Link
+      trigger.addEventListener('click', function (event) {
+        if (window.matchMedia('(hover: none)').matches && !item.classList.contains('is-open')) {
+          event.preventDefault();
+          setOpen(true);
+        }
+      });
+      item.addEventListener('mouseenter', function () { trigger.setAttribute('aria-expanded', 'true'); });
+      item.addEventListener('mouseleave', function () { setOpen(false); });
+      document.addEventListener('click', function (event) { if (!item.contains(event.target)) setOpen(false); });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && item.contains(document.activeElement)) {
+          setOpen(false);
+          trigger.focus();
+        }
+      });
+    });
+  }
+
+  function initFilters() {
+    document.querySelectorAll('[data-filter-for]').forEach(function (bar) {
+      var target = document.getElementById(bar.getAttribute('data-filter-for'));
+      if (!target) return;
+      var buttons = bar.querySelectorAll('button[data-value]');
+      var items = target.querySelectorAll('[data-tags]');
+      var count = document.querySelector('[data-count-for="' + target.id + '"]');
+      function apply(value) {
+        var visible = 0;
+        items.forEach(function (item) {
+          var show = value === 'alle' || (' ' + item.getAttribute('data-tags') + ' ').indexOf(' ' + value + ' ') > -1;
+          item.hidden = !show;
+          if (show) visible++;
+        });
+        buttons.forEach(function (button) {
+          var on = button.getAttribute('data-value') === value;
+          button.classList.toggle('is-active', on);
+          button.setAttribute('aria-pressed', String(on));
+        });
+        if (count) count.textContent = visible + (visible === 1 ? ' Eintrag' : ' Einträge');
+      }
+      buttons.forEach(function (button) {
+        button.addEventListener('click', function () { apply(button.getAttribute('data-value')); });
+      });
+      apply('alle');
+    });
+  }
+
   function initPreviewForm() {
     var form = document.querySelector('[data-preview-form]');
     if (!form) return;
@@ -302,6 +356,8 @@
     initCycle();
     initTeamFilter();
     initPreviewForm();
+    initMega();
+    initFilters();
     var year = document.querySelector('[data-year]');
     if (year) year.textContent = String(new Date().getFullYear());
   });

@@ -451,3 +451,32 @@ figure { margin: 0; }
 .social a:hover { background: var(--teal); border-color: var(--teal); color: var(--deep); }
 .mobile-nav .social { margin-top: 16px; }
 .mobile-nav .social a { width: 44px; min-height: 44px; border: 1px solid #2c4557; font-size: 0; justify-content: center; }
+
+/* Aufklappmenü „Produkte“ */
+.nav { align-items: center; }
+.nav-item { position: relative; display: flex; align-items: center; height: 88px; }
+.nav .nav-trigger { display: inline-flex; align-items: center; gap: 6px; }
+.nav-trigger svg { transition: transform .2s; }
+.mega { position: absolute; top: 100%; left: 50%; z-index: 60; display: grid; grid-template-columns: repeat(3, minmax(210px, auto)); gap: 32px; padding: 28px 32px; border-radius: 5px; background: #fff; box-shadow: 0 24px 48px rgba(17, 34, 45, .2); opacity: 0; visibility: hidden; transform: translate(-50%, 8px); transition: opacity .2s, transform .2s, visibility .2s; }
+.has-mega:hover .mega, .has-mega:focus-within .mega, .has-mega.is-open .mega { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.has-mega:hover .nav-trigger svg, .has-mega.is-open .nav-trigger svg { transform: rotate(180deg); }
+.mega-col { display: flex; flex-direction: column; gap: 2px; }
+.mega-col strong { margin-bottom: 8px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--slate); }
+.nav .mega a { padding: 7px 0; color: var(--petrol); font-size: 16px; font-weight: 600; white-space: nowrap; }
+.nav .mega a:hover { color: var(--royal); }
+.mnav-group { border-bottom: 1px solid rgba(255, 255, 255, .06); }
+.mnav-group summary { display: flex; align-items: center; justify-content: space-between; min-height: 52px; color: #fff; font-size: 18px; font-weight: 600; cursor: pointer; list-style: none; }
+.mnav-group summary::-webkit-details-marker { display: none; }
+.mnav-group summary::after { content: "+"; color: var(--teal); font-size: 24px; line-height: 1; }
+.mnav-group[open] summary::after { content: "–"; }
+.mnav-sub { display: flex; flex-direction: column; padding: 0 0 10px 14px; }
+.mobile-nav .mnav-sub a:not(.btn) { min-height: 44px; border-bottom: 0; color: #c9d2e0; font-size: 16px; }
+
+/* Kontaktleiste auf dem Handy */
+.mobile-cta { display: none; }
+@media (max-width: 760px) {
+  .mobile-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: rgba(17, 34, 45, .96); border-top: 1px solid rgba(255, 255, 255, .08); }
+  .mobile-cta a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border: 1px solid #53627e; border-radius: 5px; color: #fff; font-size: 16px; font-weight: 700; }
+  .mobile-cta a.is-primary { background: var(--teal); border-color: var(--teal); color: var(--deep); }
+  body { padding-bottom: 72px; }
+}
