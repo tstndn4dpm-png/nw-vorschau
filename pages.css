@@ -351,7 +351,10 @@ a.tile:hover, .js .stagger.in-view > a.tile:hover { transform: translateY(-4px);
 .catalog-card details[open] summary::after, .acc[open] summary::after { content: "–"; }
 .catalog-card ul, .acc ul, .tile ul { display: flex; flex-direction: column; gap: 6px; margin: 8px 0 0; padding-left: 18px; font-size: 15px; line-height: 1.5; color: var(--slate); }
 .tile--dark ul { color: var(--mist); }
-.card-link { font-weight: 700; }
+.card-link { display: inline-block; margin-top: 10px; font-weight: 700; }
+.acc-body .acc-sub { margin: 16px 0 0; font-family: var(--font-body); font-size: 15px; font-weight: 700; color: var(--petrol); }
+.only-mobile { display: none; }
+@media (max-width: 760px) { .only-mobile { display: inline; } }
 
 /* Akkordeons */
 .acc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; }

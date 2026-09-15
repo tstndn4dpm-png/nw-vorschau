@@ -122,6 +122,7 @@
       nav.hidden = !open;
       burger.setAttribute('aria-expanded', String(open));
       burger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+      document.body.classList.toggle('menu-open', open);
     }
 
     burger.addEventListener('click', function () { setOpen(nav.hidden); });
@@ -282,6 +283,7 @@
   function initMega() {
     document.querySelectorAll('.has-mega').forEach(function (item) {
       var trigger = item.querySelector('.nav-trigger');
+      var suppressFocus = false;
       function setOpen(open) {
         item.classList.toggle('is-open', open);
         trigger.setAttribute('aria-expanded', String(open));
@@ -293,13 +295,26 @@
           setOpen(true);
         }
       });
-      item.addEventListener('mouseenter', function () { trigger.setAttribute('aria-expanded', 'true'); });
+      item.addEventListener('mouseenter', function () { setOpen(true); });
       item.addEventListener('mouseleave', function () { setOpen(false); });
-      document.addEventListener('click', function (event) { if (!item.contains(event.target)) setOpen(false); });
+      item.addEventListener('focusin', function () {
+        if (suppressFocus) { suppressFocus = false; return; }
+        setOpen(true);
+      });
+      item.addEventListener('focusout', function (event) {
+        if (!item.contains(event.relatedTarget)) setOpen(false);
+      });
+      item.querySelectorAll('.mega a').forEach(function (link) {
+        link.addEventListener('click', function () { setOpen(false); });
+      });
+      document.addEventListener('pointerdown', function (event) { if (!item.contains(event.target)) setOpen(false); });
       document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && item.contains(document.activeElement)) {
+        if (event.key === 'Escape' && item.classList.contains('is-open')) {
           setOpen(false);
-          trigger.focus();
+          if (item.contains(document.activeElement)) {
+            suppressFocus = true;
+            trigger.focus();
+          }
         }
       });
     });
